@@ -2,6 +2,9 @@ import React from 'react'
 
 class Book extends React.Component{
     render(){
+        if(!this.props.book.authors){
+            this.props.book.authors=[]
+        }
         return(
           <li>
             <div className="book">
@@ -18,7 +21,8 @@ class Book extends React.Component{
                   <select value={this.props.book.shelf}
                           onChange={event => this.props.click(this.props.book, event.target.value)}
                     >{/*修改默认值*/}
-                    <option value="none" disabled>Move to...</option>
+                    
+                    <option value="not" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
@@ -32,7 +36,6 @@ class Book extends React.Component{
               <div className="book-title">{this.props.book.title}</div>
 
               {/*不止一个作者，而是一个数组*/}
-              if(this.props.book.authors)
                 {this.props.book.authors.map(author =>
                     <div className="book-authors" key={author}>{author}</div>
                 )}
