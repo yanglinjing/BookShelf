@@ -39,7 +39,7 @@ class Book extends React.Component{
               <div className="book-title">{this.props.book.title}</div>
 
               {/*不止一个作者，而是一个数组*/}
-
+              {/*&& 左边为真则进行右边*/}
                 {authors && authors.map(author =>
                     <div className="book-authors" key={author}>{author}</div>
                 )}
