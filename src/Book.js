@@ -1,7 +1,12 @@
 import React from 'react'
 
 class Book extends React.Component{
+  
     render(){
+
+      {/*ES6解构*/}
+      const {imageLinks} = this.props.book;
+      const {authors} = this.props.book;
 
         return(
           <li>
@@ -12,7 +17,7 @@ class Book extends React.Component{
                     style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")` }}>
+                            backgroundImage: `url("${imageLinks ? imageLinks.thumbnail : 'img/noCover.jpg'}")` }}>
                 </div>
 
                 <div className="book-shelf-changer">
@@ -34,7 +39,7 @@ class Book extends React.Component{
 
               {/*不止一个作者，而是一个数组*/}
 
-                {this.props.book.authors.map(author =>
+                {authors && authors.map(author =>
                     <div className="book-authors" key={author}>{author}</div>
                 )}
 

@@ -35,10 +35,6 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    if(!this.state.tmp.thumbnail){
-
-    }
-
     return (
       <div className="app">
 
@@ -63,8 +59,13 @@ class BooksApp extends React.Component {
                     type="text"
                     placeholder="Search by title or author"
                     onChange={event =>
-                        BooksAPI.search(event.target.value).then(data=>
-                           this.setState({tmp: data})
+                        BooksAPI.search(event.target.value).then(data=>{
+                          if(Array.isArray(data)){
+                            this.setState({tmp: data});
+                          }else{
+                            this.setState({tmp: []});
+                          }
+                        }
                     )}
                 />
 
