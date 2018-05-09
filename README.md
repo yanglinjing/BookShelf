@@ -1,4 +1,25 @@
 # MyReads Project
+This is my final assignment of the Front-and-End Development Course @Udacity.
+
+The page includes 3 bookshelves:
+_currently reading,_
+_have read_, and
+_want to read._
+
+There are two main functions:
+
+1.
+Users can move books from one shelf to another.
+
+2.
+It also has a book-searching function. Users can search books in the database by keywords and then add them to one bookshelf (**Limitation**: In order to get results, the keywords must be included in the provided 'SEARCH_TERMS.md'.)
+
+_React_ and _Ajax_ are used in this project.
+
+![image text](img/myBookshelf1.jpg)
+![image text](img/myBookshelf2.jpg)
+
+#The original requirements of this assignment are as follows:
 
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
 
