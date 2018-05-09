@@ -1,7 +1,7 @@
 import React from 'react'
 
 class Book extends React.Component{
-  
+
     render(){
 
       {/*ES6解构*/}
@@ -22,8 +22,9 @@ class Book extends React.Component{
 
                 <div className="book-shelf-changer">
                   <select value={this.props.book.shelf}
-                          onChange={event => this.props.click(this.props.book, event.target.value)}
-                    >{/*修改默认值*/}
+                          onChange={event =>
+                            this.props.click(this.props.book, event.target.value)}
+                    >
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
