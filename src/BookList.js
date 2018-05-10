@@ -3,9 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
 import BookShelf from './BookShelf'
 
-class BookList extends React.Component {
-
-  render(){
+function BookList(props){
     return(
       <div className="list-books">
 
@@ -16,27 +14,27 @@ class BookList extends React.Component {
         <div className="list-books-content">
           {/*{JSON.stringify(this.state.books)}*/}
             <BookShelf
-                books={this.props.books.filter(book=>
+                books={props.books.filter(book=>
                   book.shelf ==='currentlyReading'
                 )}
                 title={'Currently Reading'}
-                click={this.props.change}
+                click={props.change}
             />
 
             <BookShelf
-                books={this.props.books.filter(book=>
+                books={props.books.filter(book=>
                   book.shelf ==='read'
                 )}
                 title={'Have Read'}
-                click={this.props.change}
+                click={props.change}
             />
 
             <BookShelf
-                books={this.props.books.filter(book=>
+                books={props.books.filter(book=>
                   book.shelf ==='wantToRead'
                 )}
                 title={'Want to Read'}
-                click={this.props.change}
+                click={props.change}
             />
 
         </div>
@@ -48,7 +46,6 @@ class BookList extends React.Component {
 
       </div>
     )
-  }
 }
 
 export default BookList
