@@ -3,9 +3,23 @@ import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
 import Book from './Book.js'
 
+
 class SearchBooks extends React.Component {
   state = {
-        tmp: []
+        searchResults: []
+  }
+
+  whetherOnShelf(shelfBooks, searchResults){
+      searchResults.map(searchResult => {
+            const resultInShelf = shelfBooks.find(
+                    shelfBook => shelfBook.id === searchResult.id
+            );
+            if(resultInShelf){
+                searchResult.shelf = resultInShelf.shelf;
+            }else{
+                searchResult.shelf = 'none';
+            }}
+      )
   }
 
   render(){
@@ -25,9 +39,9 @@ class SearchBooks extends React.Component {
                   onChange={event =>
                       event.target.value && BooksAPI.search(event.target.value).then(data=>{
                         if(Array.isArray(data)){
-                          this.setState({tmp: data});
+                          this.setState({searchResults: data});
                         }else{
-                          this.setState({tmp: []});
+                          this.setState({searchResults: []});
                         }
                       }
                   )}
@@ -36,9 +50,11 @@ class SearchBooks extends React.Component {
 
           </div>
 
+          {/*输入搜索内容*/}
           <div className="search-books-results">
             <ol className="books-grid">
-                {this.state.tmp.map(book =>
+                {this.whetherOnShelf(this.props.books, this.state.searchResults)}
+                {this.state.searchResults.map(book =>
                     <Book book={book}
                           key={book.id}
                           click={this.props.change}

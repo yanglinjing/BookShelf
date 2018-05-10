@@ -1,12 +1,10 @@
 import React from 'react'
 
 class Book extends React.Component{
-
     render(){
 
       {/*ES6解构*/}
-      const {imageLinks} = this.props.book;
-      const {authors} = this.props.book;
+      const {imageLinks, authors, shelf} = this.props.book;
 
         return(
           <li>
@@ -17,15 +15,15 @@ class Book extends React.Component{
                     style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url("${imageLinks ? imageLinks.thumbnail : 'img/noCover.jpg'}")` }}>
-                </div>
+                            backgroundImage: `url("${imageLinks ? imageLinks.thumbnail : require('./img/noCover.jpg')}")` }}>
+                </div>{/*图片也需要导入*/}
 
                 <div className="book-shelf-changer">
-                  <select value={this.props.book.shelf}
+                  <select value={shelf}
                           onChange={event =>
                             this.props.click(this.props.book, event.target.value)}
                     >
-                    <option value="none" disabled>Move to...</option>
+                    <option value="toMove" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Have Read</option>
