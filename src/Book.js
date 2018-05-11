@@ -2,7 +2,6 @@ import React from 'react'
 
 function Book(props){
 
-    {/*ES6解构*/}
     const {imageLinks, authors, shelf} = props.book;
 
     return(

@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
 import Book from './Book.js'
+import * as _ from "lodash"
 
 
 class SearchBooks extends React.Component {
@@ -14,13 +15,21 @@ class SearchBooks extends React.Component {
             const resultInShelf = shelfBooks.find(
                     shelfBook => shelfBook.id === searchResult.id
             );
-            if(resultInShelf){
-                searchResult.shelf = resultInShelf.shelf;
-            }else{
-                searchResult.shelf = 'none';
-            }}
+            searchResult.shelf = resultInShelf ? resultInShelf.shelf : 'none';
+            }
       )
   }
+
+  updateQuery = _.debounce(query => {
+     query &&
+       BooksAPI.search(query).then(data => {
+         if (Array.isArray(data)) {
+           this.setState({ searchResults: data });
+         } else {
+           this.setState({ searchResults: [] });
+         }
+       });
+  }, 400);
 
   render(){
     return(
@@ -36,15 +45,7 @@ class SearchBooks extends React.Component {
               <input
                   type="text"
                   placeholder="Search by title or author"
-                  onChange={event =>
-                      event.target.value && BooksAPI.search(event.target.value).then(data=>{
-                        if(Array.isArray(data)){
-                          this.setState({searchResults: data});
-                        }else{
-                          this.setState({searchResults: []});
-                        }
-                      }
-                  )}
+                  onChange={event => this.updateQuery(event.target.value)}
               />
             </div>
 
